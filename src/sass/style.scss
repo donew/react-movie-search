@@ -1,0 +1,240 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+$theme-active:#77cc6d;
+$standard-margin:10px;
+
+//Pushing borders to css
+@mixin border($style, $color, $sides) {
+    @if ($style != "") {
+        @if ($sides == "") {
+            border: $style $color;
+        } @else {
+            @each $side in $sides {
+               @if ($side == 'top' or
+                    $side == 'right' or
+                    $side == 'bottom' or
+                    $side == 'left') {
+
+                    border-#{$side}: $style $color;
+                }
+            }
+        }  
+
+    }
+}
+*:focus{
+	outline: none!important;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+	font-weight: normal;
+	color:#000;
+	font-size: 13px;
+}
+h1{
+	font-size: 20px;
+	text-align: center;
+	padding: 30px 0;
+	text-transform: uppercase;
+	background: #f7f7f7;
+	@include border(1px solid, #eee, top bottom);
+}
+.pageWrapper{
+	>section.page{
+		padding: 20px 50px;
+		min-height: 400px;
+		overflow: hidden;
+		text-align: center;
+		> p{
+			text-align: center;
+			>input{
+				background:transparent;
+				border: 0;
+				padding: 10px 10px;
+			}
+			>input[type="search"]{
+				@include border(1px solid, #eee, bottom);
+				min-width: 400px;
+			}
+			>input[type="search"].error{
+				@include border(1px solid, red, bottom);
+				background-color:rgba(255,0,0,0.02);
+			}
+			>input[type="button"]{
+				background-color: $theme-active;
+				color: #fff;
+				cursor:pointer;
+				margin-left: $standard-margin;
+			}
+		}
+		>p.inputText{
+			margin-bottom: 50px;
+		}
+		>article{
+			width: 700px;
+			margin: 0 auto;
+			overflow: hidden;
+			> section{
+				> h2{
+					font-size: 23px;
+					font-weight: 300;
+					padding: 10px 0;
+					text-align: left;
+				}
+				> img,>ul{
+					float: left;
+				}
+				>img{
+					margin-right: $standard-margin;
+				}
+				> ul{
+					max-width: 370px;
+					padding-left: $standard-margin;
+					text-align: left;					
+					li{
+						font-size: 13px;						
+						margin-bottom: 10px;
+						font-weight: 300px;
+						line-height: 23px;
+					}
+					li.title{
+						font-size: 18px;
+					}
+				}
+			}
+			&.list{
+				float: none;
+				display: inline-flex;
+  				max-width: 200px;
+				padding: 0px 10px;
+				transition: all 0.5s ease;
+				cursor:pointer;				  
+				  > section{
+					  > h2{
+						  font-size: 15px;
+					  }
+					  >img{
+						  max-width: 100%;
+						  margin-bottom: $standard-margin
+					  }
+					  > ul{
+						  width: 100%;
+						  text-align: center;
+						  
+					  }
+				  }
+				  &:hover{
+					  background-color: #ccc;
+					  transform: scale(1.05);
+				  }
+			}
+		}
+	}
+	> footer{
+		padding: 40px;
+		text-align: center;
+		background-color: $theme-active;
+		color: #fff;
+		font-size: 18px;
+	}
+}
+.stick-100{
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+}
+.spinner {
+  width: 40px;
+  height: 40px;
+  display: none;
+  position: relative;
+  margin: 20px auto;
+}
+.spinner.active{
+	display: inline-block;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #ccc;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+.movie-detail{
+	@extend .stick-100;
+	> div{
+		@extend .stick-100;
+		background-color: rgba(0,0,0,0.25);
+	}
+}
